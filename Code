@@ -1,18 +1,21 @@
-import os
-from kaggle.api.kaggle_api_extended import KaggleApi
+import tensorflow as tf 
+from tensorflow import keras 
+from keras import Sequential
+from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 
-# Authenticate with Kaggle API
-api = KaggleApi()
-api.authenticate()
-
-# Download the dataset
-api.dataset_download_files('salader/dogs-vs-cats', path='datasets/', unzip=True)
-
-import os
-
-# Define the path to the extracted dataset
-extract_dir = 'C:\\Users\\bhanop1\\Desktop\\Code\\Image-Classification-\\datasets\\dogs_vs_cats'
-
-# List files in the extraction directory
-extracted_files = os.listdir(extract_dir)
-print(f'Files in the extracted dataset directory: {extracted_files}')
+# Generators (divides the dataset into batches)
+# Only loads that batch into the RAM, then moves on to the next
+train_ds = keras.utils.image_dataset_from_directory(
+    directory = r'C:\Users\bhanop1\Desktop\Code\Image-Classification-\datasets\dogs-vs-cats\dogs_vs_cats\train',
+    labels = 'inferred',
+    label_mode='int',  # Will assign 0 to cats and 1 to dogs
+    batch_size=32,
+    image_size=(256, 256)
+)
+validation_ds = keras.utils.image_dataset_from_directory(
+    directory = r'C:\Users\bhanop1\Desktop\Code\Image-Classification-\datasets\dogs-vs-cats\dogs_vs_cats\test',
+    labels = 'inferred',
+    label_mode='int',
+    batch_size=32,
+    image_size=(256, 256)
+)

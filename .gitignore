@@ -1,3 +1,6 @@
+# Ignore virtual environment
+myenv/
+
 # Ignore the datasets directory
 datasets/
 
