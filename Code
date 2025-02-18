@@ -1,18 +1,17 @@
-import tensorflow as tf 
-from tensorflow import keras 
-from keras import Sequential
-from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
+import tensorflow as tf
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 
 # Generators (divides the dataset into batches)
 # Only loads that batch into the RAM, then moves on to the next
-train_ds = keras.utils.image_dataset_from_directory(
+train_ds = tf.keras.utils.image_dataset_from_directory(
     directory = r'C:\Users\bhanop1\Desktop\Code\Image-Classification-\datasets\dogs-vs-cats\dogs_vs_cats\train',
     labels = 'inferred',
     label_mode='int',  # Will assign 0 to cats and 1 to dogs
     batch_size=32,
     image_size=(256, 256)
 )
-validation_ds = keras.utils.image_dataset_from_directory(
+validation_ds = tf.keras.utils.image_dataset_from_directory(
     directory = r'C:\Users\bhanop1\Desktop\Code\Image-Classification-\datasets\dogs-vs-cats\dogs_vs_cats\test',
     labels = 'inferred',
     label_mode='int',
