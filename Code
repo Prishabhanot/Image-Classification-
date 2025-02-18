@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
+from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, BatchNormalization, Dropout
 
 # Generators (divides the dataset into batches)
 # Only loads that batch into the RAM, then moves on to the next
@@ -34,23 +34,37 @@ model.add(Conv2D(32,kernel_size=(3,3), padding='valid', activation='relu', input
 '''A small grid (like 3x3 or 5x5) slides over the image, applying a mathematical operation (convolution) 
 at each position. The result is a set of new images called feature maps that highlight where certain patterns are detected.'''
 
+model.add(BatchNormalization())
+
 model.add(MaxPooling2D(pool_size=(2,2),strides=2,padding='valid'))
 '''A pooling layer reduces the size of the feature maps, making the model more efficient and less prone to overfitting. It 
 looks at small windows (like 2x2) in the feature map and takes the maximum value from each window.'''
 
 model.add(Conv2D(64,kernel_size=(3,3), padding='valid', activation='relu'))
+model.add(BatchNormalization())
+'''Batch normalization standardizes the inputs for each mini-batch to improve training. It determines the mean and variance 
+for each mini-batch, then subtracts the mean and divides by the standard deviation, finnally optionally apply a learnable transformation to adjust the normalized inputs'''
+
 model.add(MaxPooling2D(pool_size=(2,2),strides=2,padding='valid'))
 
 model.add(Conv2D(128,kernel_size=(3,3), padding='valid', activation='relu'))
+model.add(BatchNormalization())
 model.add(MaxPooling2D(pool_size=(2,2),strides=2,padding='valid'))
 
 model.add(Flatten())
 '''layer takes the multidimensional data from the previous layer (like 3D data from convolutional layers) and flattens it into a 1D array.'''
 
 model.add(Dense(128, activation='relu'))
+
+model.add(Dropout(0.1))
+'''regularization technique used to prevent overfitting, it works by randomly "dropping out" (setting to zero) a fraction of the neurons during
+ training, this forces the network to learn redundant representations and improves its generalization capabilities'''
+
 model.add(Dense(64, activation='relu'))
 '''ReLU (Rectified Linear Unit) is activation function that helps the model learn non-linear relationships. It sets all negative values to 
 zero and keeps positive values unchanged.'''
+
+model.add(Dropout(0.1))
 
 model.add(Dense(1, activation='sigmoid'))
 '''Sigmoid is an activation function that outputs values between 0 and 1. It’s ideal for binary classification tasks (like classifying images 
