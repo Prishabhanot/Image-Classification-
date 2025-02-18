@@ -1,5 +1,6 @@
 # Image-Classification-
-'''Overview
+
+Overview
 In this project, I leveraged TensorFlow's Keras API to create a sequential model that processes, normalizes, and classifies images of cats and dogs with impressive accuracy.
 
 Requirements
@@ -35,4 +36,3 @@ The model was trained over a series of epochs, where it learned to classify the 
 Visualization
 To understand how well the model is performing, I plotted the training and validation accuracy over the epochs. This helps in visualizing the model's learning progress and identifying any potential issues like overfitting.
 
-'''
