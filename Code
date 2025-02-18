@@ -62,3 +62,5 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 ''''adam' is an optimization algorithm that adjusts the model's weights to minimize the loss function.
 'binary_crossentropy' is a loss function used for binary classification tasks, which measures the performance of the model.
 ['accuracy'] specifies that you want to track the accuracy of the model during training.'''
+
+history = model.fit(train_ds,epochs=10,validation_data=validation_ds)
