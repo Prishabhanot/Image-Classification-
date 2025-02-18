@@ -55,3 +55,10 @@ zero and keeps positive values unchanged.'''
 model.add(Dense(1, activation='sigmoid'))
 '''Sigmoid is an activation function that outputs values between 0 and 1. It’s ideal for binary classification tasks (like classifying images 
 into two categories: cats or dogs).'''
+
+# Compiling the model
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+''''adam' is an optimization algorithm that adjusts the model's weights to minimize the loss function.
+'binary_crossentropy' is a loss function used for binary classification tasks, which measures the performance of the model.
+['accuracy'] specifies that you want to track the accuracy of the model during training.'''
