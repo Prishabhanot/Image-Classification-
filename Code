@@ -18,3 +18,11 @@ validation_ds = tf.keras.utils.image_dataset_from_directory(
     batch_size=32,
     image_size=(256, 256)
 )
+
+#Normalize (a part of preprocessing)
+def process(image, label):
+    image=tf.cast(image/255. , tf.float32)
+    return image,label
+
+train_ds = train_ds.map(process)
+validation_ds = validation_ds.map(process) 
