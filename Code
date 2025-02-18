@@ -64,3 +64,9 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 ['accuracy'] specifies that you want to track the accuracy of the model during training.'''
 
 history = model.fit(train_ds,epochs=10,validation_data=validation_ds)
+
+import matplotlib.pyplot as plt
+plt.plot(history.history['accuracy'], color ='red', label='train')
+plt.plot(history.history['val_accuracy'], color='blue', label='validation')
+plt.legend()
+plt.show()
